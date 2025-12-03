@@ -16,7 +16,6 @@ target/
 *.ipr
 logs/
 screenshots/
-target/
 report.html
 
 ### Eclipse ###
