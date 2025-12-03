@@ -7,6 +7,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: write      # REQUIRED for pushing to gh-pages
+  pages: write         # REQUIRED for GitHub Pages
+  id-token: write
+
 jobs:
   build:
 
