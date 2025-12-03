@@ -20,7 +20,7 @@ public class TestListener implements ITestListener {
         logger.info(result.getMethod().getMethodName());
         logger.info(result.getMethod().getDescription());
         logger.info(Arrays.toString(result.getMethod().getGroups()));
-       ExtentReportUtility.createExtentTest(result.getMethod().getMethodName());
+        ExtentReportUtility.createExtentTest(result.getMethod().getMethodName());
     }
 
     public void onTestSuccess(ITestResult result) {
@@ -37,7 +37,7 @@ public class TestListener implements ITestListener {
         BrowserUtility browserUtility = ((TestBase)testClass).getInstance();
         logger.info("Capturing Screenshot for the failed tests");
         String screenShotPath = browserUtility.takeScreenshot(result.getMethod().getMethodName());
-        logger.info("Attaching the screenshot to the HTML File");
+        logger.info("Attaching the Screenshot to the HTML File");
         ExtentReportUtility.getTest().addScreenCaptureFromPath(screenShotPath);
     }
 
