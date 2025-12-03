@@ -12,7 +12,7 @@ public class ExtentReportUtility {
     private static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     public static void setupSparkReporter(String reportName){
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir")+ File.separator+reportName);
+        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir")+ "//"+reportName);
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
     }

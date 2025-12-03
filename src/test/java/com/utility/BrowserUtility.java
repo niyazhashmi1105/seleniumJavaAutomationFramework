@@ -149,7 +149,7 @@ public abstract class BrowserUtility {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         String timeStamp = simpleDateFormat.format(date);
-        String path = "./screenshots"+File.separator+name+" - "+timeStamp+".png";
+        String path = "./screenshots/"+name+"-"+timeStamp+".png";
         File screenshotFile = new File(path);
         try {
             FileUtils.copyFile(screenshotData, screenshotFile);
