@@ -4,8 +4,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
-import java.io.File;
-
 public class ExtentReportUtility {
 
     private static ExtentReports extentReports;

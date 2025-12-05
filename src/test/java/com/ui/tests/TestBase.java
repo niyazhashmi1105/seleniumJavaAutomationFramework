@@ -1,5 +1,6 @@
 package com.ui.tests;
 
+import com.aventstack.extentreports.Status;
 import com.constants.Browser;
 import com.ui.pages.HomePage;
 import com.utility.BrowserUtility;
@@ -33,13 +34,13 @@ public class TestBase {
         this.isLambdaTest = isLambdaTest;
 
         if(isLambdaTest){
-            logger.info("Load the Home Page of the Website on LambdaTest Platform");
             lambdaDriver = LambdaTestUtility.intializeLambdaTestSession(browser,result.getMethod().getMethodName());
             homePage = new HomePage(lambdaDriver);
+            homePage.extentLog(Status.INFO,"Load the Home Page of the Website on LambdaTest Platform");
         }
         else {
-            logger.info("Load the Home Page of the Website on Local Machine");
             homePage = new HomePage(Browser.valueOf(browser.toUpperCase()), isHeadLess);
+            homePage.extentLog(Status.INFO,"Load the Home Page of the Website on Local Machine");
         }
     }
 

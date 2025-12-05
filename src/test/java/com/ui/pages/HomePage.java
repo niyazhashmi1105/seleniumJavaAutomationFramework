@@ -1,5 +1,6 @@
 package com.ui.pages;
 
+import com.aventstack.extentreports.Status;
 import com.constants.Browser;
 import static com.constants.Env.*;
 
@@ -26,12 +27,13 @@ public final class HomePage extends BrowserUtility {
     }
     public HomePage(WebDriver driver) {
         super(driver);
+        extentLog(Status.INFO,"Launching Browser on Environment and URL using json file" +readJSON(QA).getUrl());
         goToWebsite(readJSON(QA).getUrl());
     }
 
     public LoginPage goToLoginPage(){
 
-        logger.info("Trying to performing click to go to Sign in Page");
+
         clickOn(SIGN_IN_LINK_LOCATOR);
         return new LoginPage(getDriver());
     }
