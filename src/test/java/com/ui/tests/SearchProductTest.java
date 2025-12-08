@@ -1,7 +1,10 @@
 package com.ui.tests;
 
 import com.ui.pages.MyAccountPage;
-import org.openqa.selenium.safari.SafariOptions;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -10,6 +13,7 @@ import org.testng.annotations.Test;
 public class SearchProductTest extends TestBase{
 
     private MyAccountPage myAccountPage;
+    private static final String SEARCH_TERM = "Printed Summer Dress";
 
     @BeforeMethod(description = "Verify user log into the application")
     public void setUp(){
@@ -18,8 +22,7 @@ public class SearchProductTest extends TestBase{
 
     @Test(description = "Verify Logged in user able to search a product and verify search result product title",groups ={"smoke","sanity","e2e"})
     public void verifySearchProductTest(){
-        String data = myAccountPage.searchProduct("Printed Summer Dress").getSearchResultProductTitle();
-        System.out.println(data);
-
+       boolean actualResult =  myAccountPage.searchProduct(SEARCH_TERM).getAllProductNames(SEARCH_TERM);
+       assertTrue(actualResult);
     }
 }

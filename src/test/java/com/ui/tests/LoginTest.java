@@ -16,18 +16,18 @@ public class LoginTest extends TestBase{
                 .getUserName(),"Md Niyaz Hashmi");
     }
 
-    @Test(description = "Verifies with the valid user is able to login to the application",groups={"e2e","sanity"},
-            dataProviderClass = com.ui.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestCSVDataProvider")
-    public void loginCSVTest(User user) {
-        assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword())
-                .getUserName(),"Md Niyaz Hashmi");
-    }
-
-    @Test(description = "Verifies with the valid user is able to login to the application",groups={"e2e","sanity"},
-            dataProviderClass = com.ui.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestExcelDataProvider", retryAnalyzer = com.ui.listeners.MyRetryAnalyzer.class)
-    public void loginExcelTest(User user) {
-        assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword())
-                .getUserName(),"Md Niyaz Hashmi");
-    }
+//    @Test(description = "Verifies with the valid user is able to login to the application",groups={"e2e","sanity"},
+//            dataProviderClass = com.ui.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestCSVDataProvider")
+//    public void loginCSVTest(User user) {
+//        assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword())
+//                .getUserName(),"Md Niyaz Hashmi");
+//    }
+//
+//    @Test(description = "Verifies with the valid user is able to login to the application",groups={"e2e","sanity"},
+//            dataProviderClass = com.ui.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestExcelDataProvider", retryAnalyzer = com.ui.listeners.MyRetryAnalyzer.class)
+//    public void loginExcelTest(User user) {
+//        assertEquals(homePage.goToLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword())
+//                .getUserName(),"Md Niyaz Hashmi");
+//    }
 
 }

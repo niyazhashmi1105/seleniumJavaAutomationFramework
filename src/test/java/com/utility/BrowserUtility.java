@@ -14,13 +14,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class BrowserUtility {
 
@@ -137,12 +140,25 @@ public abstract class BrowserUtility {
         element.click();
     }
 
-    public void enterText(By locator, String textToEnter ){
+    public void clickOn(WebElement element){
+        extentLog(Status.INFO,"Finding Element with the element and perform click");
+        element.click();
+    }
+
+    public void enterText(By locator, String textToEnter){
 
         extentLog(Status.INFO,"Finding Element with the locator "+  locator);
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         extentLog(Status.INFO,"Element Found and now going to enter text "+ textToEnter);
         element.sendKeys(textToEnter);
+    }
+
+    public void clearText(By textBoxLocator){
+
+        extentLog(Status.INFO,"Finding Element with the locator "+  textBoxLocator);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(textBoxLocator));
+        extentLog(Status.INFO,"Element Found and clearing the text field "+ textBoxLocator);
+        element.clear();
     }
 
     public void enterSpecialKey(By locator, Keys keyToEnter ){
@@ -159,6 +175,56 @@ public abstract class BrowserUtility {
         extentLog(Status.INFO,"Element Found and now going to to return visible text  "+ element.getText());
         return element.getText();
     }
+
+    public String getVisibleText(WebElement element){
+        extentLog(Status.INFO,"Returning Visible Text of WebElement "+ element.getText());
+        return element.getText();
+    }
+
+    public List<String> getAllVisibleText(By locator){
+        extentLog(Status.INFO,"Finding All Elements with the locator "+  locator);
+        List<WebElement> elementList = driver.get().findElements(locator);
+
+        List<String> visibleTextList = new ArrayList<>();
+        for(WebElement element: elementList){
+            extentLog(Status.INFO,"Getting Visible Text of all WebElements "+  getVisibleText(element));
+            visibleTextList.add(getVisibleText(element));
+        }
+        return visibleTextList;
+    }
+
+    public void selectFromDropdown(By dropdownLocator, String optionToSelect){
+        extentLog(Status.INFO,"Finding Element with the locator "+  dropdownLocator);
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(dropdownLocator));
+        Select select = new Select(element);
+        extentLog(Status.INFO, "Selecting the Option " + optionToSelect);
+        select.selectByVisibleText(optionToSelect);
+
+    }
+
+    public void selectFromDropdownOptions(By dropdownLocator, String optionToSelect){
+
+        extentLog(Status.INFO,"Finding Element with the locator "+  dropdownLocator);
+        List<WebElement> options = getAllElements(dropdownLocator);
+
+        for(WebElement option:options){
+            if(getVisibleText(option).equals(optionToSelect)){
+                clickOn(option);
+                break;
+            }
+        }
+    }
+
+    public List<WebElement> getAllElements(By locator) {
+        extentLog(Status.INFO,"Finding All Elements with the locator" + locator);
+
+        List<WebElement> elementList = driver.get().findElements(locator);
+        logger.info("Elements Found and now printing the List of Elements");
+
+        return elementList;
+
+    }
+
 
     public String takeScreenshot(String name){
 
