@@ -2,9 +2,7 @@ package com.ui.tests;
 
 import com.ui.pages.MyAccountPage;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -22,7 +20,8 @@ public class SearchProductTest extends TestBase{
 
     @Test(description = "Verify Logged in user able to search a product and verify search result product title",groups ={"smoke","sanity","e2e"})
     public void verifySearchProductTest(){
-       boolean actualResult =  myAccountPage.searchProduct(SEARCH_TERM).getAllProductNames(SEARCH_TERM);
-       assertTrue(actualResult);
+        boolean actualResult = myAccountPage.searchProduct(SEARCH_TERM)
+                .isSearchTermPresentInProductList(SEARCH_TERM);
+        Assert.assertTrue(actualResult);
     }
 }

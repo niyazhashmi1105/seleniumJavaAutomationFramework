@@ -11,7 +11,7 @@ public class SearchResultPage extends BrowserUtility {
 
 
     private static final By PRODUCT_LISTING_TITLE_LOCATOR = By.xpath("//span[@class='lighter']");
-    private static final By ALL_PRODUCT_LISTS_NAME_LOCATOR = By.xpath("//span[@class='lighter']");
+    private static final By ALL_PRODUCT_LISTS_NAME_LOCATOR = By.xpath("//h5[@itemprop='name']/a");
 
     public SearchResultPage(WebDriver driver) {
         super(driver);
@@ -21,10 +21,16 @@ public class SearchResultPage extends BrowserUtility {
         return getVisibleText(PRODUCT_LISTING_TITLE_LOCATOR);
     }
 
-    public boolean getAllProductNames(String searchTerm){
+    public boolean isSearchTermPresentInProductList(String searchTerm){
 
         List<String> keywords = Arrays.asList(searchTerm.toLowerCase().split(" "));
         List<String> productNamesList = getAllVisibleText(ALL_PRODUCT_LISTS_NAME_LOCATOR);
         return productNamesList.stream().anyMatch(name -> keywords.stream().anyMatch(name.toLowerCase()::contains));
+    }
+
+    public ProductDetailPage clickOnTheProductAtIndex(int index) {
+        clickOn(getAllElements(ALL_PRODUCT_LISTS_NAME_LOCATOR).get(index));
+        return new ProductDetailPage(getDriver());
+
     }
 }

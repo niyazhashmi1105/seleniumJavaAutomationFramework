@@ -18,12 +18,13 @@ public class AddressPage extends BrowserUtility {
     private static final By ADDITIONAL_TEXTAREA_LOCATOR = By.id("other");
     private static final By ADDRESS_TITLE_TEXTBOX_LOCATOR = By.id("alias");
     private static final By SAVE_ADDRESS_BUTTON_LOCATOR = By.id("submitAddress");
+    private static final By ADDRESS_HEADING = By.tagName("h3");
 
     public AddressPage(WebDriver driver) {
         super(driver);
     }
 
-    public void saveAddress(AddressPojo address){
+    public String saveAddress(AddressPojo address){
         enterText(COMPANY_TEXTBOX_LOCATOR,address.getCompany());
         enterText(ADDRESS1_TEXTBOX_LOCATOR,address.getAddressLine1());
         enterText(ADDRESS2_TEXTBOX_LOCATOR,address.getAddressLine2());
@@ -35,6 +36,7 @@ public class AddressPage extends BrowserUtility {
         clearText(ADDRESS_TITLE_TEXTBOX_LOCATOR);
         enterText(ADDRESS_TITLE_TEXTBOX_LOCATOR,address.getAddressTitle());
         selectFromDropdownOptions(STATE_DROPDOWN_DROPDOWN_LOCATOR,address.getState());
-        //clickOn(SAVE_ADDRESS_BUTTON_LOCATOR);
+        clickOn(SAVE_ADDRESS_BUTTON_LOCATOR);
+        return getVisibleText(ADDRESS_HEADING);
     }
 }

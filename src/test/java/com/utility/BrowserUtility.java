@@ -177,17 +177,18 @@ public abstract class BrowserUtility {
     }
 
     public String getVisibleText(WebElement element){
-        extentLog(Status.INFO,"Returning Visible Text of WebElement "+ element.getText());
+        extentLog(Status.INFO,"Returning Visible Text of WebElement " +element);
         return element.getText();
     }
 
     public List<String> getAllVisibleText(By locator){
         extentLog(Status.INFO,"Finding All Elements with the locator "+  locator);
-        List<WebElement> elementList = driver.get().findElements(locator);
+        List<WebElement> elementList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
 
         List<String> visibleTextList = new ArrayList<>();
+        assert elementList != null;
         for(WebElement element: elementList){
-            extentLog(Status.INFO,"Getting Visible Text of all WebElements "+  getVisibleText(element));
+            extentLog(Status.INFO,getVisibleText(element));
             visibleTextList.add(getVisibleText(element));
         }
         return visibleTextList;
