@@ -217,13 +217,10 @@ public abstract class BrowserUtility {
     }
 
     public List<WebElement> getAllElements(By locator) {
-        extentLog(Status.INFO,"Finding All Elements with the locator" + locator);
-
-        List<WebElement> elementList = driver.get().findElements(locator);
-        logger.info("Elements Found and now printing the List of Elements");
-
+        extentLog(Status.INFO,"Finding All Elements with the locator " + locator);
+        List<WebElement> elementList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+        extentLog(Status.INFO,"Elements Found and now printing the List of Elements "+ elementList);
         return elementList;
-
     }
 
 
